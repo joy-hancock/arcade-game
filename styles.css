@@ -40,20 +40,6 @@
   --space-2xl: clamp(4rem, 3.4286rem + 2.8571vw, 6rem);
   --space-3xl: clamp(6rem, 5.1429rem + 4.2857vw, 9rem);
 
-  /* One-up pairs */
-  --space-3xs-2xs: clamp(0.25rem, 0.1071rem + 0.7143vw, 0.75rem);
-  --space-2xs-xs: clamp(0.5rem, 0.3214rem + 0.8929vw, 1.125rem);
-  --space-xs-s: clamp(0.75rem, 0.5357rem + 1.0714vw, 1.5rem);
-  --space-s-m: clamp(1rem, 0.6429rem + 1.7857vw, 2.25rem);
-  --space-m-l: clamp(1.5rem, 1.0714rem + 2.1429vw, 3rem);
-  --space-l-xl: clamp(2rem, 1.2857rem + 3.5714vw, 4.5rem);
-  --space-xl-2xl: clamp(3rem, 2.1429rem + 4.2857vw, 6rem);
-  --space-2xl-3xl: clamp(4rem, 2.5714rem + 7.1429vw, 9rem);
-
-  /* Custom pairs */
-  --space-s-l: clamp(1rem, 0.4286rem + 2.8571vw, 3rem);
-  --space-l-2xl: clamp(2rem, 0.8571rem + 5.7143vw, 6rem);
-
   /* Line height */
   --lh-flat: 1.1;
   --lh-fine: 1.2;
@@ -96,6 +82,12 @@ dd {
   margin-block-end: 0;
 }
 
+img,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
 body {
   min-height: 100vh;
   max-width: 100vw;
@@ -115,7 +107,6 @@ body {
   place-items: center;
   overflow: hidden;
   text-align: center;
-  color: white;
   text-wrap: balance;
 }
 
@@ -150,13 +141,13 @@ body {
     }
   }
 }
+
 form {
   counter-reset: score red-flags;
 }
 
 input[name='screen'] {
   display: none;
-  /* translate: 0 5em; */
 
   &#start:checked ~ .screen-start,
   &#game:checked ~ .screen-game {
@@ -199,22 +190,6 @@ input[name='screen'] {
   }
 }
 
-@keyframes screenEnd {
-  to {
-    opacity: 1;
-    pointer-events: revert;
-  }
-}
-
-@keyframes drop {
-  from {
-    translate: var(--translateX) -60vh;
-  }
-  to {
-    translate: calc(var(--translateX) + var(--offset, 0px)) 110vh;
-  }
-}
-
 .screen {
   position: absolute;
   inset: 0;
@@ -227,21 +202,40 @@ input[name='screen'] {
   padding: var(--space-l) var(--space-xl);
   margin: auto;
   color: var(--clr-white);
+  gap: 2rem;
 }
 
 .buttonish {
   display: flex;
   align-items: center;
-  gap: 3rem;
+  gap: var(--space-s);
+  flex-wrap: nowrap;
+  font-family: var(--font-secondary);
+  text-transform: uppercase;
+  font-size: var(--step-3);
+  cursor: pointer;
+
+  &:hover .cls-1 {
+    fill: var(--clr-accent);
+  }
+
+  &:hover {
+    color: var(--clr-accent);
+  }
 
   & svg {
-    height: 5rem;
+    height: 4rem;
   }
 }
 
-/* .screen-start {
-  display: none;
-} */
+.retro {
+  text-shadow: 2px 8px 0px #ff0088, 0 0 1em rgb(136, 0, 255),
+    0 0 0.2em rgb(136, 0, 255);
+  color: var(--clr-accent);
+  text-transform: uppercase;
+  margin-block-end: 0;
+  line-height: var(--lh-fine);
+}
 
 .screen-game {
   cursor: url('https://helpimg.s3.us-east-1.amazonaws.com/landing_pages/CAM25/Space-Invaders.png'),
@@ -254,7 +248,6 @@ input[name='screen'] {
   display: grid;
   pointer-events: none;
   align-content: space-between;
-  gap: 2rem;
   padding-block-end: 0;
 
   button {
@@ -275,41 +268,12 @@ input[name='screen'] {
   }
 }
 
-@keyframes arcadeFlash {
-  0%,
-  100% {
-    color: #ffffff;
-  }
-  50% {
-    color: #ffff00;
-  }
-}
-
-.total .result::after {
-  content: attr(data-final-score);
-}
-
 h1 {
   font-size: var(--step-5);
   text-shadow: 1px 1px 5px var(--clr-black);
   font-family: var(--font-secondary);
   text-transform: uppercase;
   margin-block-start: 0;
-}
-
-.buttonish {
-  font-family: var(--font-secondary);
-  text-transform: uppercase;
-  font-size: var(--step-3);
-  cursor: pointer;
-
-  &:hover .cls-1 {
-    fill: var(--clr-accent);
-  }
-
-  &:hover {
-    color: var(--clr-accent);
-  }
 }
 
 .flags {
@@ -348,6 +312,7 @@ h1 {
 
 .red-flag {
   --delay: calc(var(--i) * 1s + 2s);
+
   width: clamp(50px, 5vw, 120px);
   height: clamp(50px, 5vw, 120px);
   background-image: url('https://helpimg.s3.us-east-1.amazonaws.com/landing_pages/CSAM/2025/arcade/redflag.png');
@@ -356,8 +321,10 @@ h1 {
     counter-increment: score;
   }
 }
+
 .enkryptor {
   --delay: calc(var(--i) * 1.2s + 5s);
+
   background-image: url('https://helpimg.s3.us-east-1.amazonaws.com/landing_pages/CSAM/2025/arcade/enkryptor.png');
   width: clamp(60px, 8vw, 120px);
   height: clamp(60px, 8vw, 120px);
@@ -370,6 +337,7 @@ h1 {
   width: clamp(60px, 8vw, 120px);
   height: clamp(60px, 8vw, 120px);
 }
+
 .deepfake {
   --delay: calc(var(--i) * 1.8s + 9s);
 
@@ -377,6 +345,7 @@ h1 {
   width: clamp(80px, 12vw, 180px);
   height: clamp(80px, 12vw, 180px);
 }
+
 .doppelganger {
   --delay: calc(var(--i) * 1.5s + 14s);
 
@@ -397,13 +366,6 @@ h1 {
   animation: hideGui 0.1s 32.5s forwards;
 }
 
-@keyframes hideGui {
-  to {
-    opacity: 0;
-    visibility: hidden;
-  }
-}
-
 .timer span {
   &::before {
     content: '3';
@@ -413,6 +375,68 @@ h1 {
   &::after {
     content: '0';
     animation: timer 10s 3s 3 step-end;
+  }
+}
+
+.score::after {
+  content: attr(data-score);
+}
+
+.screen-end-text {
+  display: flex;
+  gap: 2rem;
+  flex-direction: column;
+
+  h2 {
+    margin-block-start: 0;
+    font-size: var(--step-6);
+  }
+}
+
+.final-score {
+  font-size: var(--step-3);
+  letter-spacing: 3px;
+  font-weight: var(--fw-bold);
+}
+
+.disclaimer {
+  font-size: var(--step--1);
+  letter-spacing: 2px;
+  background: var(--clr-black);
+}
+
+/* Animations */
+
+@keyframes screenEnd {
+  to {
+    opacity: 1;
+    pointer-events: revert;
+  }
+}
+
+@keyframes drop {
+  from {
+    translate: var(--translateX) -60vh;
+  }
+  to {
+    translate: calc(var(--translateX) + var(--offset, 0px)) 110vh;
+  }
+}
+
+@keyframes arcadeFlash {
+  0%,
+  100% {
+    color: #ffffff;
+  }
+  50% {
+    color: #ffff00;
+  }
+}
+
+@keyframes hideGui {
+  to {
+    opacity: 0;
+    visibility: hidden;
   }
 }
 
@@ -447,39 +471,4 @@ h1 {
   90% {
     content: '0';
   }
-}
-.score::after {
-  content: attr(data-score);
-}
-
-.retro {
-  text-shadow: 2px 8px 0px #ff0088, 0 0 1em rgb(136, 0, 255),
-    0 0 0.2em rgb(136, 0, 255);
-  color: var(--clr-accent);
-  text-transform: uppercase;
-  margin-block-end: 0;
-  line-height: var(--lh-fine);
-}
-
-.screen-end-text {
-  display: flex;
-  gap: 2rem;
-  flex-direction: column;
-
-  h2 {
-    margin-block-start: 0;
-    font-size: var(--step-6);
-  }
-}
-
-.final-score {
-  font-size: var(--step-3);
-  letter-spacing: 3px;
-  font-weight: var(--fw-bold);
-}
-
-.disclaimer {
-  font-size: var(--step--1);
-  letter-spacing: 2px;
-  background: var(--clr-black);
 }
