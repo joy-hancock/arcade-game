@@ -244,7 +244,7 @@ input[name='screen'] {
 } */
 
 .screen-game {
-  cursor: url('https://helpimg.s3.us-east-1.amazonaws.com/landing_pages/CSAM/2025/arcade/spaceship.png'),
+  cursor: url('https://helpimg.s3.us-east-1.amazonaws.com/landing_pages/CAM25/Space-Invaders.png'),
     auto;
   display: none;
   opacity: 0;
@@ -326,7 +326,7 @@ h1 {
 
   appearance: none;
   position: absolute;
-  cursor: url('https://helpimg.s3.us-east-1.amazonaws.com/landing_pages/CSAM/2025/arcade/spaceship.png'),
+  cursor: url('https://helpimg.s3.us-east-1.amazonaws.com/landing_pages/CAM25/Space-Invaders.png'),
     auto;
   inset: -2.5vw;
   background-size: contain;
@@ -348,8 +348,8 @@ h1 {
 
 .red-flag {
   --delay: calc(var(--i) * 1s + 2s);
-  width: clamp(40px, 4vw, 60px);
-  height: clamp(40px, 4vw, 60px);
+  width: clamp(50px, 5vw, 120px);
+  height: clamp(50px, 5vw, 120px);
   background-image: url('https://helpimg.s3.us-east-1.amazonaws.com/landing_pages/CSAM/2025/arcade/redflag.png');
 
   &:checked {
