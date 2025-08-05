@@ -116,6 +116,7 @@ body {
   overflow: hidden;
   text-align: center;
   color: white;
+  text-wrap: balance;
 }
 
 .gameContainer {
@@ -263,6 +264,10 @@ input[name='screen'] {
     border: 5px solid var(--clr-black);
     outline: 5px solid var(--clr-accent);
     margin-block-end: var(--space-m);
+  }
+
+  button:active {
+    scale: 0.95;
   }
 
   .disclaimer {
@@ -453,6 +458,7 @@ h1 {
   color: var(--clr-accent);
   text-transform: uppercase;
   margin-block-end: 0;
+  line-height: var(--lh-fine);
 }
 
 .screen-end-text {
